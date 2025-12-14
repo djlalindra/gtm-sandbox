@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>GTM Sandbox</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+  <h1>GTM Sandbox</h1>
+
+  <button id="cta">Primary CTA</button>
+
+  <form id="leadForm">
+    <label>Email: <input name="email" type="email" required></label>
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    // Basic dataLayer
+    window.dataLayer = window.dataLayer || [];
+    function dl(event, obj) { dataLayer.push(Object.assign({event}, obj || {})); }
+
+    // CTA click -> dataLayer event
+    document.getElementById('cta').addEventListener('click', () => {
+      dl('cta_click', {cta_text: 'Primary CTA', page_section: 'hero'});
+    });
+
+    // Form submit -> dataLayer event (prevent actual submit)
+    document.getElementById('leadForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      dl('lead_submit', {form_id: 'leadForm'});
+      alert('Form submit simulated (no network request).');
+    });
+  </script>
+</body>
+</html>
