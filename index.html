@@ -1,36 +1,435 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>GTM Sandbox</title>
+  <title>GTM Sandbox – Tracking Lab</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- ✅ PASTE YOUR GTM <script> SNIPPET HERE (inside <head>) -->
+
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height: 1.4; margin: 0; }
+    header, section, footer { padding: 20px; border-bottom: 1px solid #ddd; }
+    nav a { margin-right: 12px; }
+    .wrap { max-width: 960px; margin: 0 auto; }
+    .btn { display: inline-block; padding: 10px 14px; border: 1px solid #222; border-radius: 8px; text-decoration: none; margin-right: 10px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    img { max-width: 100%; border-radius: 10px; cursor: pointer; }
+    .card { border: 1px solid #ddd; border-radius: 12px; padding: 14px; }
+    details { border: 1px solid #ddd; border-radius: 12px; padding: 12px; margin: 10px 0; }
+    details summary { cursor: pointer; font-weight: 600; }
+    .small { font-size: 0.9rem; opacity: 0.85; }
+    input { padding: 10px; width: 100%; max-width: 360px; }
+  </style>
 </head>
+
 <body>
-  <h1>GTM Sandbox</h1>
 
-  <button id="cta">Primary CTA</button>
+  <!-- ✅ PASTE YOUR GTM <noscript> SNIPPET HERE (immediately after <body>) -->
 
-  <form id="leadForm">
-    <label>Email: <input name="email" type="email" required></label>
-    <button type="submit">Submit</button>
-  </form>
+  <div class="wrap">
+
+    <header id="top" data-section="header">
+      <h1>GTM Sandbox – Tracking Lab</h1>
+
+      <!-- Menu / nav clicks -->
+      <nav aria-label="Primary navigation" data-section="nav-primary">
+        <a href="#services" data-track="internal_link" data-link_location="nav">Services</a>
+        <a href="#pricing" data-track="internal_link" data-link_location="nav">Pricing</a>
+        <a href="#faq" data-track="internal_link" data-link_location="nav">FAQ</a>
+        <a href="#contact" data-track="internal_link" data-link_location="nav">Contact</a>
+        <a href="https://example.com" data-track="outbound_link" data-link_location="nav">Outbound example.com</a>
+      </nav>
+
+      <!-- Breadcrumb clicks -->
+      <p class="small" data-section="breadcrumb">
+        <a href="#top" data-track="internal_link" data-link_location="breadcrumb">Home</a> /
+        <a href="#services" data-track="internal_link" data-link_location="breadcrumb">Services</a>
+      </p>
+    </header>
+
+    <!-- HERO section clicks -->
+    <section id="hero" data-section="hero">
+      <h2>Hero CTAs</h2>
+
+      <a class="btn"
+         href="mailto:test@example.com"
+         data-track="email_click"
+         data-section="hero"
+         data-label="Email CTA">Email us</a>
+
+      <a class="btn"
+         href="tel:+14165550199"
+         data-track="phone_click"
+         data-section="hero"
+         data-label="Phone CTA">Call us</a>
+
+      <a class="btn"
+         href="https://wa.me/14165550199"
+         target="_blank" rel="noopener"
+         data-track="chat_click"
+         data-channel="whatsapp"
+         data-section="hero"
+         data-label="WhatsApp CTA">WhatsApp</a>
+
+      <a class="btn"
+         href="/gtm-sandbox/files/sample.pdf"
+         data-track="download_click"
+         data-file_type="pdf"
+         data-section="hero"
+         data-label="PDF Download">Download PDF (simulate)</a>
+
+      <p class="small">
+        Tip: The PDF link will 404 unless you add a file — that’s fine for click tracking.
+      </p>
+
+      <!-- Image clicks -->
+      <div class="grid" style="margin-top:14px;">
+        <div class="card">
+          <h3>Image CTA (trackable)</h3>
+          <img
+            src="https://picsum.photos/seed/gtm1/800/420"
+            alt="Example image CTA 1"
+            data-track="image_click"
+            data-section="hero"
+            data-image_id="hero_img_1"
+            data-label="Hero image 1"
+          />
+          <p class="small">Click the image.</p>
+        </div>
+
+        <div class="card">
+          <h3>Internal navigation</h3>
+          <a class="btn" href="#services" data-track="internal_link" data-link_location="hero" data-section="hero">Go to Services</a>
+          <a class="btn" href="#pricing" data-track="internal_link" data-link_location="hero" data-section="hero">Go to Pricing</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES section -->
+    <section id="services" data-section="services">
+      <h2>Services (section interaction)</h2>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Service A</h3>
+          <p>Track card clicks + CTA clicks.</p>
+          <button class="btn"
+                  data-track="section_click"
+                  data-section="services"
+                  data-element_type="button"
+                  data-label="Service A CTA">Service A CTA</button>
+        </div>
+
+        <div class="card">
+          <h3>Service B</h3>
+          <p>Track internal links inside content.</p>
+          <a href="#contact"
+             data-track="internal_link"
+             data-link_location="content"
+             data-section="services"
+             data-label="Contact link in Services">Contact link</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING section -->
+    <section id="pricing" data-section="pricing">
+      <h2>Pricing (table + interactions)</h2>
+
+      <div class="card">
+        <p>Simulate “comparison interactions” via buttons.</p>
+        <button class="btn"
+                data-track="section_click"
+                data-section="pricing"
+                data-element_type="toggle"
+                data-label="Toggle monthly">Monthly</button>
+
+        <button class="btn"
+                data-track="section_click"
+                data-section="pricing"
+                data-element_type="toggle"
+                data-label="Toggle annual">Annual</button>
+      </div>
+    </section>
+
+    <!-- VIDEO section -->
+    <section id="video" data-section="video">
+      <h2>Video interactions</h2>
+      <p class="small">This uses the HTML5 video element so it’s easy to track.</p>
+
+      <video id="demoVideo" width="100%" controls preload="metadata"
+             data-track="video"
+             data-section="video"
+             data-label="Demo video">
+        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+      </video>
+    </section>
+
+    <!-- SEARCH section -->
+    <section id="search" data-section="search">
+      <h2>On-site search simulation</h2>
+
+      <form id="siteSearchForm" class="card" data-track="search_form" data-section="search">
+        <label for="q"><strong>Search</strong></label><br>
+        <input id="q" name="q" type="text" placeholder="Try: 'pricing' or 'zzz'" required />
+        <button class="btn" type="submit" data-track="search_submit" data-section="search" data-label="Search submit">Search</button>
+        <p id="searchResult" class="small"></p>
+      </form>
+    </section>
+
+    <!-- FAQ section -->
+    <section id="faq" data-section="faq">
+      <h2>FAQ (accordion opens)</h2>
+
+      <details data-track="faq_open" data-section="faq" data-question="What is GA4?">
+        <summary>What is GA4?</summary>
+        <p>GA4 is Google’s event-based analytics platform.</p>
+      </details>
+
+      <details data-track="faq_open" data-section="faq" data-question="What is GTM?">
+        <summary>What is GTM?</summary>
+        <p>Google Tag Manager manages tags, triggers, and variables.</p>
+      </details>
+    </section>
+
+    <!-- CONTACT section -->
+    <section id="contact" data-section="contact">
+      <h2>Lead form (submit + validation errors)</h2>
+
+      <form id="leadForm" class="card" novalidate data-track="lead_form" data-section="contact">
+        <label>Email</label><br>
+        <input name="email" type="email" placeholder="name@example.com" required />
+        <br><br>
+
+        <label>Message</label><br>
+        <input name="message" type="text" placeholder="Short message" required />
+        <br><br>
+
+        <button class="btn" type="submit"
+                data-track="form_submit"
+                data-section="contact"
+                data-form_id="leadForm"
+                data-label="Lead form submit">Submit</button>
+
+        <p class="small">We prevent actual submission so you can repeat tests.</p>
+      </form>
+    </section>
+
+    <!-- FOOTER nav clicks -->
+    <footer data-section="footer">
+      <p><strong>Footer navigation</strong></p>
+      <a href="#top" data-track="internal_link" data-link_location="footer" data-section="footer">Back to top</a> |
+      <a href="#services" data-track="internal_link" data-link_location="footer" data-section="footer">Services</a> |
+      <a href="https://www.wikipedia.org" target="_blank" rel="noopener"
+         data-track="outbound_link" data-link_location="footer" data-section="footer">Outbound Wikipedia</a>
+
+      <p class="small" style="margin-top:10px;">
+        Scroll this page to trigger scroll depth events.
+      </p>
+    </footer>
+
+  </div>
 
   <script>
-    // Basic dataLayer
+    // ---------- DataLayer helper ----------
     window.dataLayer = window.dataLayer || [];
-    function dl(event, obj) { dataLayer.push(Object.assign({event}, obj || {})); }
+    function dl(event, params) {
+      dataLayer.push(Object.assign({ event }, params || {}));
+    }
 
-    // CTA click -> dataLayer event
-    document.getElementById('cta').addEventListener('click', () => {
-      dl('cta_click', {cta_text: 'Primary CTA', page_section: 'hero'});
+    // ---------- Click tracking (email, phone, internal, outbound, image, section, download, chat) ----------
+    // Uses data-track attributes to keep it clean and scalable.
+    document.addEventListener('click', function (e) {
+      const el = e.target.closest('[data-track]');
+      if (!el) return;
+
+      const trackType = el.getAttribute('data-track');
+      const href = el.getAttribute('href') || '';
+      const section = el.getAttribute('data-section') || (el.closest('[data-section]')?.getAttribute('data-section') || 'unknown');
+      const label = el.getAttribute('data-label') || (el.textContent || '').trim().slice(0, 80);
+
+      // Base payload
+      const payload = {
+        track_type: trackType,
+        section: section,
+        label: label,
+        page_location: location.href
+      };
+
+      // Enrich by type
+      if (trackType === 'email_click') payload.email = href.replace('mailto:', '');
+      if (trackType === 'phone_click') payload.phone = href.replace('tel:', '');
+      if (trackType === 'chat_click') payload.channel = el.getAttribute('data-channel') || 'chat';
+      if (trackType === 'download_click') payload.file_type = el.getAttribute('data-file_type') || 'unknown';
+      if (trackType === 'internal_link') payload.link_location = el.getAttribute('data-link_location') || 'unknown';
+      if (trackType === 'outbound_link') payload.link_location = el.getAttribute('data-link_location') || 'unknown';
+      if (trackType === 'image_click') {
+        payload.image_id = el.getAttribute('data-image_id') || 'unknown';
+        payload.image_src = el.getAttribute('src') || '';
+        payload.image_alt = el.getAttribute('alt') || '';
+      }
+      if (trackType === 'section_click') {
+        payload.element_type = el.getAttribute('data-element_type') || 'unknown';
+      }
+
+      // Determine internal vs outbound automatically if it's a normal link
+      if (href && (trackType === 'internal_link' || trackType === 'outbound_link')) {
+        try {
+          const u = new URL(href, location.href);
+          payload.link_url = u.href;
+          payload.is_outbound = (u.host && u.host !== location.host);
+        } catch {}
+      }
+
+      dl(trackType, payload);
     });
 
-    // Form submit -> dataLayer event (prevent actual submit)
-    document.getElementById('leadForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      dl('lead_submit', {form_id: 'leadForm'});
-      alert('Form submit simulated (no network request).');
-    });
+    // ---------- Scroll depth (25/50/75/90) ----------
+    (function setupScrollDepth() {
+      const marks = [25, 50, 75, 90];
+      const fired = new Set();
+
+      function getScrollPercent() {
+        const doc = document.documentElement;
+        const scrollTop = window.pageYOffset || doc.scrollTop;
+        const scrollHeight = doc.scrollHeight - doc.clientHeight;
+        if (scrollHeight <= 0) return 100;
+        return Math.round((scrollTop / scrollHeight) * 100);
+      }
+
+      window.addEventListener('scroll', () => {
+        const p = getScrollPercent();
+        marks.forEach(m => {
+          if (p >= m && !fired.has(m)) {
+            fired.add(m);
+            dl('scroll_depth', {
+              percent: m,
+              page_location: location.href
+            });
+          }
+        });
+      }, { passive: true });
+    })();
+
+    // ---------- Video interactions ----------
+    (function setupVideo() {
+      const v = document.getElementById('demoVideo');
+      if (!v) return;
+
+      let started = false;
+      let lastQuartile = 0;
+
+      v.addEventListener('play', () => {
+        if (!started) {
+          started = true;
+          dl('video_start', { section: 'video', label: 'Demo video', page_location: location.href });
+        }
+      });
+
+      v.addEventListener('timeupdate', () => {
+        if (!v.duration) return;
+        const pct = Math.floor((v.currentTime / v.duration) * 100);
+
+        const quartiles = [25, 50, 75, 90];
+        for (const q of quartiles) {
+          if (pct >= q && lastQuartile < q) {
+            lastQuartile = q;
+            dl('video_progress', { section: 'video', label: 'Demo video', percent: q, page_location: location.href });
+          }
+        }
+      });
+
+      v.addEventListener('ended', () => {
+        dl('video_complete', { section: 'video', label: 'Demo video', page_location: location.href });
+      });
+    })();
+
+    // ---------- FAQ opens ----------
+    (function setupFAQ() {
+      document.querySelectorAll('details[data-track="faq_open"]').forEach(d => {
+        d.addEventListener('toggle', () => {
+          if (d.open) {
+            dl('faq_open', {
+              section: d.getAttribute('data-section') || 'faq',
+              question: d.getAttribute('data-question') || (d.querySelector('summary')?.textContent || '').trim(),
+              page_location: location.href
+            });
+          }
+        });
+      });
+    })();
+
+    // ---------- Site search simulation ----------
+    (function setupSearch() {
+      const form = document.getElementById('siteSearchForm');
+      const resultEl = document.getElementById('searchResult');
+      if (!form || !resultEl) return;
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const q = (form.querySelector('#q')?.value || '').trim();
+        const known = ['pricing', 'services', 'contact', 'faq', 'video'];
+        const hasResults = known.some(k => q.toLowerCase().includes(k));
+
+        dl('site_search', {
+          section: 'search',
+          search_term: q,
+          has_results: hasResults,
+          page_location: location.href
+        });
+
+        if (!hasResults) {
+          dl('search_no_results', {
+            section: 'search',
+            search_term: q,
+            page_location: location.href
+          });
+        }
+
+        resultEl.textContent = hasResults
+          ? `Results found for: "${q}"`
+          : `No results for: "${q}"`;
+      });
+    })();
+
+    // ---------- Form submit + basic validation errors ----------
+    (function setupLeadForm() {
+      const form = document.getElementById('leadForm');
+      if (!form) return;
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const email = form.querySelector('input[name="email"]');
+        const msg = form.querySelector('input[name="message"]');
+
+        const errors = [];
+        if (!email.value || !email.value.includes('@')) errors.push('invalid_email');
+        if (!msg.value || msg.value.length < 3) errors.push('message_too_short');
+
+        if (errors.length) {
+          dl('form_error', {
+            section: 'contact',
+            form_id: 'leadForm',
+            errors: errors,
+            page_location: location.href
+          });
+          alert('Form error simulated: ' + errors.join(', '));
+          return;
+        }
+
+        dl('form_submit', {
+          section: 'contact',
+          form_id: 'leadForm',
+          page_location: location.href
+        });
+
+        alert('Form submit simulated (no network request).');
+        form.reset();
+      });
+    })();
   </script>
+
 </body>
 </html>
